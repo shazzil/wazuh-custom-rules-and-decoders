@@ -1,0 +1,30 @@
+<decoder name="vsftpd">
+  <prematch>^\w\w\w \w\w\w\s+\d+ \S+ \d+ [pid \d+] </prematch>
+</decoder>
+
+<decoder name="vsftpd">
+  <program_name>vsftpd</program_name>
+  <prematch>^\w\w\w \w\w\w\s+\d+ \S+ \d+ [pid \d+] </prematch>
+</decoder>
+
+<decoder name="vsftpd_login">
+  <parent>vsftpd</parent>
+  <prematch offset="after_parent"> LOGIN: </prematch>
+  <regex offset="after_parent">[(\S+)] (\S+ LOGIN): Client "(\S+\w)"</regex>
+  <order>user,status,srcip</order>
+</decoder>
+
+<decoder name="vsftpd_download">
+  <parent>vsftpd</parent>
+  <prematch offset="after_parent"> DOWNLOAD: </prematch>
+  <regex offset="after_parent">[(\S+)] OK (DOWNLOAD): Client \S(\S+)\S (\S+)\S (\d+ \w+)</regex>
+  <order>user,action,srcip,filename,size</order>
+</decoder>
+
+<decoder name="vsftpd_upload">
+  <parent>vsftpd</parent>
+  <prematch offset="after_parent"> OK UPLOAD: </prematch>
+  <regex offset="after_parent">[(\S+)] OK (UPLOAD): Client "(\S+)"\S "(\S+)"\S (\d+\s\w+)</regex>
+  <order>user,action,srcip,filename,size</order>
+</decoder>
+
