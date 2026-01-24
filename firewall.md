@@ -34,7 +34,7 @@
         iptables -A INPUT -p tcp -m tcp --dport 21 -j DROP
 
 # 5)  FIN Scan Detection
-    #Logs packets where only the FIN flag is set
+    #Logs packets where onl the FIN flag is set
     
         iptables -A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,PSH,ACK,URG FIN -m limit --limit 5/min -j LOG --log-prefix "NMAP_FIN_SCAN: "
 
