@@ -1,4 +1,4 @@
-# Basic Firewall Rules (iptables)
+# Basic Firewall Rules (iptables
 
 #	Allows all packets from existing user 
          iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
